@@ -16,17 +16,26 @@ function attackEnemy() {
 function drawPlayer() {
   document.getElementById('hero-health').innerText = '💖 ' + player.currentHealth
   // TODO finish the rest of the player attributes 
-  document.getElementById('hero-gold').innerText = '🪙 '
-  document.getElementById('hero-potions').innerText = '🧪 '
-  document.getElementById('hero-attack').innerText = '⚔️ '
+  document.getElementById('hero-gold').innerText = '🪙 ' + player.gold
+  document.getElementById('hero-potions').innerText = '🧪 ' + player.potions
+  document.getElementById('hero-attack').innerText = '⚔️ ' + player.attackPower
 }
 
 function drawCurrentEnemy() {
-  //  STUB
+  document.getElementById('enemy-health').innerText = '💖 ' + currentEnemy.health
+  document.getElementById('enemy-gold').innerText = '🪙 ' + currentEnemy.gold
+  document.getElementById('enemy-attack').innerText = '⚔️ ' + currentEnemy.attackPower
+  document.getElementById('enemy-type').innerText = currentEnemy.type
 }
 
 function enemyTurn() {
-  // STUB
+  let enemyDamage = Math.floor(Math.random() * currentEnemy.maxAttackPower)
+  (player.currentHealth -= enemyDamage)
+  messageUser("Your health has been reduced by " + enemyDamage + " points.")
+  if (player.currentHealth <= 0) {
+    messageUser("You died!")
+    showGameOver()
+  }
 }
 
 function rewardPlayer() {
