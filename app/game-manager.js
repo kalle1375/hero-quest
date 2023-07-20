@@ -1,3 +1,6 @@
+// TODO: Define currentEnemy so the computer stops getting mad.
+// TODO: Finish all game-manager functions.
+
 const player = {
   currentHealth: 10,
   attackPower: 1,
@@ -6,11 +9,26 @@ const player = {
 }
 
 function healPlayer() {
-  // STUB
+  if (player.potions >= 1) {
+    player.potions--
+    player.currentHealth = player.currentHealth + 10
+    enemyTurn()
+    drawPlayer()
+    drawCurrentEnemy() }
+    else {
+      (messageUser("You have no potions!"))
+  }
 }
 
 function attackEnemy() {
-  // STUB
+  enemyTurn()
+  (currentEnemy.health -= player.attack)
+  if (currentEnemy.health <= 0) {
+    rewardPlayer()
+    pickRandomEnemyFromCurrentStage()
+  drawPlayer()
+  drawCurrentEnemy()
+  }
 }
 
 function drawPlayer() {
@@ -39,15 +57,24 @@ function enemyTurn() {
 }
 
 function rewardPlayer() {
-  // STUB
+  (player.gold += currentEnemy.gold)
+  if (player.gold >= 10000) {
+    messageUser("You won!")
+    showVictory()
+  }
 }
 
 function buyPotion() {
-  // STUB
+  if (player.gold >= 5) {
+    // TODO: complete this function
+  }
+    else {
+
+    }
 }
 
 function increaseAttack() {
-  // STUB
+  // TODO: complete this function
 }
 
 drawPlayer()
