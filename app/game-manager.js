@@ -33,7 +33,6 @@ function attackEnemy() {
 
 function drawPlayer() {
   document.getElementById('hero-health').innerText = '💖 ' + player.currentHealth
-  // TODO finish the rest of the player attributes 
   document.getElementById('hero-gold').innerText = '🪙 ' + player.gold
   document.getElementById('hero-potions').innerText = '🧪 ' + player.potions
   document.getElementById('hero-attack').innerText = '⚔️ ' + player.attackPower
@@ -47,9 +46,10 @@ function drawCurrentEnemy() {
 }
 
 function enemyTurn() {
-  let enemyDamage = Math.floor(Math.random() * currentEnemy.maxAttackPower)
-  (player.currentHealth -= enemyDamage)
+  const enemyDamage = Math.floor(Math.random() * currentEnemy.maxAttackPower)
+  player.currentHealth -= enemyDamage
   messageUser("Your health has been reduced by " + enemyDamage + " points.")
+  drawPlayer()
   if (player.currentHealth <= 0) {
     messageUser("You died!")
     showGameOver()
@@ -66,15 +66,26 @@ function rewardPlayer() {
 
 function buyPotion() {
   if (player.gold >= 5) {
-    // TODO: complete this function
+    player.gold++
+    player.gold = player.gold - 5
+    messageUser("You have bought one potion!")
+    drawPlayer()
   }
     else {
-
+      messageUser("You do not have enough gold!")
     }
 }
 
 function increaseAttack() {
-  // TODO: complete this function
+  if (player.gold >= 10) {
+    player.attackPower++
+    player.gold = player.gold -10
+    messageUser("Your attack power has been increased!")
+    drawPlayer()
+  }
+    else {
+      messageUser("You do not have enough gold!")
+  }
 }
 
 drawPlayer()
